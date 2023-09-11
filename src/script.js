@@ -4,6 +4,11 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 const canvas = document.querySelector("canvas.webgl");
 
+const sizes = {
+  width: window.innerWidth,
+  height: window.innerHeight,
+};
+
 const scene = new THREE.Scene();
 
 const pixelRatio = Math.min(window.devicePixelRatio, 2);
@@ -14,11 +19,6 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(pixelRatio);
-
-const sizes = {
-  width: window.innerWidth,
-  height: window.innerHeight,
-};
 
 const camera = new THREE.PerspectiveCamera(
   75,
@@ -33,6 +33,7 @@ scene.add(camera);
 
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
+controls.enablePan = false;
 
 window.addEventListener("resize", function (e) {
   sizes.width = window.innerWidth;
@@ -63,7 +64,7 @@ scene.add(gridHelper);
 
 const cube = new THREE.Mesh(
   new THREE.BoxGeometry(1, 1, 1),
-  new THREE.MeshBasicMaterial({ color: 0xff0000 })
+  new THREE.MeshNormalMaterial()
 );
 scene.add(cube);
 
